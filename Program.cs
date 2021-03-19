@@ -27,7 +27,9 @@ namespace EsetChallenge
                 /*
                     Remove all the new lines from a copy of the data and replace them with an empty string so that we get 
                     a continuous string of alphanumeric characters. We can then select all the unique characters and create 
-                    a list of digits from this.
+                    a list of digits from this. I store it as a list instead of a HashSet as I'm storing reference types
+                    and the hashet will only evaluate it's place in memory, which will always be different and thus not
+                    not store unqiue values.
                 */
                 var passcode = data.Replace(Environment.NewLine, "").Distinct().Select(d => new Digit(d)).ToList();
 
@@ -44,6 +46,7 @@ namespace EsetChallenge
                 //  Order each digit in the passcode by the total amount of previous numbers in the Digits PreviousNumbers property.
                 passcode = passcode.OrderBy(d => d.PreviousNumbers.Count()).ToList();
 
+                //  Display the results of the process by logging them to the console.
                 Console.WriteLine($"Filename: {Path.GetFileName(file)}");
                 Console.Write("Passcode: ");
                 passcode.ForEach(d => Console.Write(d.Number));
