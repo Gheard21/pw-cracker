@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using EsetChallenge.Models;
+
 namespace EsetChallenge
 {
     class Program
