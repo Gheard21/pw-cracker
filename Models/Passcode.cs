@@ -32,8 +32,8 @@ namespace EsetChallenge.Models
 
         private void ProcessHints() => Array.ForEach(FileText.Split(Environment.NewLine), hint =>
         {
-            Digits.First(d => d.Number == hint[1]).PreviousNumbers.Add(hint[0]);
-            Digits.First(d => d.Number == hint[2]).PreviousNumbers.UnionWith(new HashSet<char>() { hint[0], hint[1] });
+            for (var i = 1; i < hint.Length; i++)
+                Digits.First(d => d.Number == hint[i]).PreviousNumbers.UnionWith(hint.Take(i).ToHashSet<char>());
         });
     }
 }
