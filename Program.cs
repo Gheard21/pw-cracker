@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using EsetChallenge.Models;
 
@@ -11,7 +12,7 @@ namespace EsetChallenge
             in the Passwords directory, and then for each one we're newing up a Passcode and
             using the PrintResults method on the Passcode object to display the full passcode.
         */
-        static void Main(string[] args) => Array.ForEach(Directory.GetFiles(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + "/Passwords", "*.txt"), file => new Passcode(file).PrintResults());
+        static void Main(string[] args) => Array.ForEach(Directory.GetFiles((Debugger.IsAttached ? Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName : Environment.CurrentDirectory) + "/Passwords", "*.txt"), file => new Passcode(file).PrintResults());
     }
 }
 
